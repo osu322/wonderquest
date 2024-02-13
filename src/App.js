@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BlurFilter } from "pixi.js";
+import { Stage, Container, Sprite, Text } from "@pixi/react";
+import { useMemo } from "react";
 
-function App() {
+export const App = () => {
+  const blurFilter = useMemo(() => new BlurFilter(4), []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stage>
+      <Sprite
+        image="https://pixijs.io/pixi-react/img/bunny.png"
+        x={400}
+        y={270}
+        anchor={{ x: 0.5, y: 0.5 }}
+      />
+
+      <Container x={400} y={330}>
+        <Text
+          text="Hello World"
+          anchor={{ x: 0.5, y: 0.5 }}
+          filters={[blurFilter]}
+        />
+      </Container>
+    </Stage>
   );
-}
+};
 
 export default App;
